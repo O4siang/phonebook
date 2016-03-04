@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     char line[MAX_LAST_NAME_SIZE];
     struct timespec start, end;
     double cpu_time1, cpu_time2;
-
+    //printf("pid: %d\n", getpid());
     /* check file opening */
     fp = fopen(DICT_FILE, "r");
     if (fp == NULL) {
