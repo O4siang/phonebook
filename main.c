@@ -10,6 +10,7 @@
 
 static double diff_in_second(struct timespec t1, struct timespec t2)
 {
+
     struct timespec diff;
     if (t2.tv_nsec-t1.tv_nsec < 0) {
         diff.tv_sec  = t2.tv_sec - t1.tv_sec - 1;
@@ -47,6 +48,11 @@ int main(int argc, char *argv[])
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
 #endif
     clock_gettime(CLOCK_REALTIME, &start);
+
+#if defined(HASH)
+    initialize();
+#endif
+
     while (fgets(line, sizeof(line), fp)) {
         while (line[i] != '\0')
             i++;
@@ -82,6 +88,8 @@ int main(int argc, char *argv[])
     FILE *output;
 #if defined(OPT)
     output = fopen("opt.txt", "a");
+#elif defined(HASH)
+    output = fopen("hash.txt", "a");
 #else
     output = fopen("orig.txt", "a");
 #endif
